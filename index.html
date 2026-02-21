@@ -2,7 +2,6 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 适配移动端 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的个人主页 | My First Project</title>
     <style>
@@ -24,9 +23,19 @@
         header {
             background-color: #2c3e50;
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 头像样式 */
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 1rem;
+            object-fit: cover;
         }
 
         header h1 {
@@ -60,12 +69,33 @@
             padding-bottom: 0.5rem;
         }
 
+        /* 社交链接 */
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #3498db;
+            color: white !important;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+
         /* 项目展示模块 */
         .projects {
             background: white;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
         }
 
         .projects h2 {
@@ -81,6 +111,54 @@
             border-left: 4px solid #3498db;
             background-color: #f9f9f9;
             border-radius: 0 4px 4px 0;
+        }
+
+        /* 联系表单 */
+        .contact {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .contact h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #2980b9;
         }
 
         /* 页脚 */
@@ -106,6 +184,8 @@
 <body>
     <!-- 头部 -->
     <header>
+        <!-- 头像（替换成你的头像链接） -->
+        <img src="https://picsum.photos/200/200" alt="我的头像" class="avatar">
         <h1>👋 你好，我是开发者小站</h1>
         <p>这是我的第一个 GitHub Pages 个人主页</p>
     </header>
@@ -118,6 +198,13 @@
             <p>我正在学习 GitHub Pages 和前端开发，这是我的第一个测试项目。</p>
             <p>📧 邮箱：your-email@example.com（可以替换成你的邮箱）</p>
             <p>🔗 GitHub：<a href="https://github.com/j2415f1452l/my-first-project" target="_blank">我的仓库地址</a></p>
+            
+            <!-- 社交链接 -->
+            <div class="social-links">
+                <a href="https://github.com/j2415f1452l" target="_blank">GitHub</a>
+                <a href="#" target="_blank">知乎</a>
+                <a href="#" target="_blank">博客</a>
+            </div>
         </section>
 
         <!-- 我的项目 -->
@@ -132,6 +219,26 @@
                 <h3>待开发的新项目</h3>
                 <p>后续我会在这里添加更多有趣的项目和学习笔记。</p>
             </div>
+        </section>
+
+        <!-- 联系我 -->
+        <section class="contact">
+            <h2>联系我</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" placeholder="请输入你的姓名">
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" placeholder="请输入你的邮箱">
+                </div>
+                <div class="form-group">
+                    <label for="message">留言</label>
+                    <textarea id="message" rows="5" placeholder="请输入你想对我说的话"></textarea>
+                </div>
+                <button type="button" class="btn-submit">发送留言</button>
+            </form>
         </section>
     </div>
 
