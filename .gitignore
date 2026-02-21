@@ -1,0 +1,4 @@
+# 忽略macOS系统自动生成的.DS_Store文件
+.DS_Store
+# 忽略所有目录下的.DS_Store文件
+**/.DS_Store
