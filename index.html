@@ -1,23 +1,143 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; -webkit-text-stroke: #000000}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <!-- 适配移动端 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页 | My First Project</title>
+    <style>
+        /* 全局样式重置和基础设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 头部导航栏 */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            opacity: 0.8;
+        }
+
+        /* 主要内容区 */
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* 关于我模块 */
+        .about {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .about h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        /* 项目展示模块 */
+        .projects {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .projects h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .project-item {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 4px solid #3498db;
+            background-color: #f9f9f9;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #666;
+            margin-top: 2rem;
+        }
+
+        /* 链接样式 */
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;h1&gt;我的第一个网站&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;p&gt;这是我用 GitHub 托管的网站。&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+    <!-- 头部 -->
+    <header>
+        <h1>👋 你好，我是开发者小站</h1>
+        <p>这是我的第一个 GitHub Pages 个人主页</p>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 关于我 -->
+        <section class="about">
+            <h2>关于我</h2>
+            <p>我正在学习 GitHub Pages 和前端开发，这是我的第一个测试项目。</p>
+            <p>📧 邮箱：your-email@example.com（可以替换成你的邮箱）</p>
+            <p>🔗 GitHub：<a href="https://github.com/j2415f1452l/my-first-project" target="_blank">我的仓库地址</a></p>
+        </section>
+
+        <!-- 我的项目 -->
+        <section class="projects">
+            <h2>我的项目</h2>
+            <div class="project-item">
+                <h3>第一个测试项目</h3>
+                <p>这是我通过 GitHub Pages 部署的第一个静态网站，用于学习和测试。</p>
+                <p>✨ 技术栈：HTML、CSS</p>
+            </div>
+            <div class="project-item">
+                <h3>待开发的新项目</h3>
+                <p>后续我会在这里添加更多有趣的项目和学习笔记。</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2026 我的第一个 GitHub 项目 | 基于 GitHub Pages 构建</p>
+    </footer>
 </body>
 </html>
