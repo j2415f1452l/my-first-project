@@ -14,18 +14,34 @@
         }
 
         body {
-            background-color: #f5f5f5;
+            /* 背景图 + 半透明遮罩，提升文字可读性 */
+            background: url('https://picsum.photos/1920/1080?blur=2') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
             line-height: 1.6;
+            /* 背景遮罩 */
+            position: relative;
         }
 
-        /* 头部导航栏 */
+        /* 背景遮罩层 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: -1;
+        }
+
+        /* 头部导航栏 - 改用紫色主题 */
         header {
-            background-color: #2c3e50;
+            background-color: #6c5ce7; /* 主题色：紫色 */
             color: white;
             padding: 1.5rem 2rem;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(108, 92, 231, 0.3);
         }
 
         /* 头像样式 */
@@ -36,14 +52,17 @@
             border: 4px solid white;
             margin: 0 auto 1rem;
             object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             margin-bottom: 0.5rem;
+            font-size: 2rem;
         }
 
         header p {
-            opacity: 0.8;
+            opacity: 0.9;
+            font-size: 1.1rem;
         }
 
         /* 主要内容区 */
@@ -57,19 +76,21 @@
         .about {
             background: white;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 12px; /* 圆角更大，更现代 */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 2rem;
+            border-top: 5px solid #6c5ce7; /* 主题色边框 */
         }
 
         .about h2 {
-            color: #2c3e50;
+            color: #6c5ce7; /* 主题色 */
             margin-bottom: 1rem;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid #6c5ce7;
             padding-bottom: 0.5rem;
+            font-size: 1.8rem;
         }
 
-        /* 社交链接 */
+        /* 社交链接 - 适配主题色 */
         .social-links {
             margin: 1rem 0;
         }
@@ -77,15 +98,18 @@
         .social-links a {
             display: inline-block;
             margin-right: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #3498db;
+            padding: 0.6rem 1.2rem;
+            background-color: #6c5ce7; /* 主题色 */
             color: white !important;
-            border-radius: 4px;
+            border-radius: 6px;
             text-decoration: none;
+            transition: all 0.3s ease; /* 过渡动画 */
         }
 
         .social-links a:hover {
-            background-color: #2980b9;
+            background-color: #5848d4; /* 深色主题色 */
+            transform: translateY(-2px); /* 悬浮上移 */
+            box-shadow: 0 4px 8px rgba(108, 92, 231, 0.3);
             text-decoration: none;
         }
 
@@ -93,93 +117,185 @@
         .projects {
             background: white;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 2rem;
+            border-top: 5px solid #6c5ce7;
         }
 
         .projects h2 {
-            color: #2c3e50;
+            color: #6c5ce7;
             margin-bottom: 1rem;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid #6c5ce7;
             padding-bottom: 0.5rem;
+            font-size: 1.8rem;
         }
 
         .project-item {
             margin: 1rem 0;
-            padding: 1rem;
-            border-left: 4px solid #3498db;
-            background-color: #f9f9f9;
-            border-radius: 0 4px 4px 0;
+            padding: 1.2rem;
+            border-left: 4px solid #6c5ce7;
+            background-color: #f8f7ff; /* 浅紫色背景 */
+            border-radius: 0 6px 6px 0;
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateX(5px); /* 悬浮右移 */
+            box-shadow: 0 2px 8px rgba(108, 92, 231, 0.2);
         }
 
         /* 联系表单 */
         .contact {
             background: white;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid #6c5ce7;
         }
 
         .contact h2 {
-            color: #2c3e50;
+            color: #6c5ce7;
             margin-bottom: 1rem;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid #6c5ce7;
             padding-bottom: 0.5rem;
+            font-size: 1.8rem;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: bold;
+            color: #555;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.9rem;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6c5ce7; /* 聚焦时主题色边框 */
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
         }
 
         .btn-submit {
-            background-color: #3498db;
+            background-color: #6c5ce7;
             color: white;
             border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 4px;
-            font-size: 1rem;
+            padding: 0.9rem 2.5rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .btn-submit:hover {
-            background-color: #2980b9;
+            background-color: #5848d4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(108, 92, 231, 0.3);
+        }
+
+        /* 提交成功提示 */
+        .success-message {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 6px;
+            border: 1px solid #c3e6cb;
         }
 
         /* 页脚 */
         footer {
             text-align: center;
-            padding: 1.5rem;
+            padding: 2rem;
             color: #666;
-            margin-top: 2rem;
+            margin-top: 3rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-top: 1px solid #eee;
         }
 
         /* 链接样式 */
         a {
-            color: #3498db;
+            color: #6c5ce7;
             text-decoration: none;
         }
 
         a:hover {
-            color: #2980b9;
+            color: #5848d4;
             text-decoration: underline;
         }
+
+        /* 响应式调整 - 手机端适配 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            header h1 {
+                font-size: 1.6rem;
+            }
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+            .social-links a {
+                display: block;
+                margin-bottom: 0.8rem;
+                text-align: center;
+            }
+        }
     </style>
+    <!-- 引入EmailJS实现表单提交（无需后端） -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // 初始化EmailJS（替换成你的配置）
+        emailjs.init('YOUR_PUBLIC_KEY');
+
+        // 表单提交函数
+        function sendMessage() {
+            // 获取表单数据
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // 简单验证
+            if (!name || !email || !message) {
+                alert('请填写完整的表单信息！');
+                return;
+            }
+
+            // 发送邮件
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                from_name: name,
+                from_email: email,
+                message: message
+            }).then(() => {
+                // 显示成功提示
+                document.getElementById('success-message').style.display = 'block';
+                // 清空表单
+                document.getElementById('contact-form').reset();
+                // 3秒后隐藏提示
+                setTimeout(() => {
+                    document.getElementById('success-message').style.display = 'none';
+                }, 3000);
+            }, (error) => {
+                alert('提交失败，请稍后重试！错误信息：' + JSON.stringify(error));
+            });
+        }
+    </script>
 </head>
 <body>
     <!-- 头部 -->
@@ -213,7 +329,7 @@
             <div class="project-item">
                 <h3>第一个测试项目</h3>
                 <p>这是我通过 GitHub Pages 部署的第一个静态网站，用于学习和测试。</p>
-                <p>✨ 技术栈：HTML、CSS</p>
+                <p>✨ 技术栈：HTML、CSS、JavaScript</p>
             </div>
             <div class="project-item">
                 <h3>待开发的新项目</h3>
@@ -224,20 +340,24 @@
         <!-- 联系我 -->
         <section class="contact">
             <h2>联系我</h2>
-            <form>
+            <form id="contact-form">
                 <div class="form-group">
                     <label for="name">姓名</label>
-                    <input type="text" id="name" placeholder="请输入你的姓名">
+                    <input type="text" id="name" placeholder="请输入你的姓名" required>
                 </div>
                 <div class="form-group">
                     <label for="email">邮箱</label>
-                    <input type="email" id="email" placeholder="请输入你的邮箱">
+                    <input type="email" id="email" placeholder="请输入你的邮箱" required>
                 </div>
                 <div class="form-group">
                     <label for="message">留言</label>
-                    <textarea id="message" rows="5" placeholder="请输入你想对我说的话"></textarea>
+                    <textarea id="message" rows="5" placeholder="请输入你想对我说的话" required></textarea>
                 </div>
-                <button type="button" class="btn-submit">发送留言</button>
+                <!-- 提交成功提示 -->
+                <div id="success-message" class="success-message">
+                    ✅ 留言提交成功！我会尽快回复你～
+                </div>
+                <button type="button" class="btn-submit" onclick="sendMessage()">发送留言</button>
             </form>
         </section>
     </div>
