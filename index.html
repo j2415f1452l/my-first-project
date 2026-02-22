@@ -1,341 +1,76 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="light">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页 | My First Project</title>
+    <title>我的个人主页</title>
     <style>
-        /* 全局样式重置和基础设置 */
-        * {
+        /* 基础样式（保留你自己的样式即可） */
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background-color: #f5f5f5;
         }
-
-        /* 浅色模式变量 */
-        :root.light {
-            --bg-color: #f5f5f5;
-            --text-color: #333;
-            --card-bg: white;
-            --card-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            --primary-color: #6c5ce7;
-            --primary-hover: #5848d4;
-            --border-color: #ddd;
-            --header-bg: #6c5ce7;
-            --header-text: white;
-            --project-bg: #f8f7ff;
-            --footer-bg: rgba(255, 255, 255, 0.8);
-            --footer-text: #666;
-        }
-
-        /* 深色模式变量 */
-        :root.dark {
-            --bg-color: #1a1a2e;
-            --text-color: #e0e0e0;
-            --card-bg: #16213e;
-            --card-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            --primary-color: #a29bfe;
-            --primary-hover: #8c7ae6;
-            --border-color: #333;
-            --header-bg: #0f3460;
-            --header-text: #e0e0e0;
-            --project-bg: #2a2d43;
-            --footer-bg: #16213e;
-            --footer-text: #aaa;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        /* 背景图 + 半透明遮罩，提升文字可读性 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://picsum.photos/1920/1080?blur=2') no-repeat center center fixed;
-            background-size: cover;
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        /* 深色模式切换按钮 */
         .theme-toggle {
+            cursor: pointer;
+            font-size: 24px;
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 1000;
         }
-
-        .theme-toggle:hover {
-            background-color: var(--primary-hover);
-            transform: scale(1.1);
+        #contact-form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-
-        /* 头部导航栏 */
-        header {
-            background-color: var(--header-bg);
-            color: var(--header-text);
-            padding: 1.5rem 2rem;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        /* 头像样式 */
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid white;
-            margin: 0 auto 1rem;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            margin-bottom: 0.5rem;
-            font-size: 2rem;
-        }
-
-        header p {
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-
-        /* 主要内容区 */
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        /* 关于我模块 */
-        .about {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 2rem;
-            border-top: 5px solid var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
-        .about h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            font-size: 1.8rem;
-        }
-
-        /* 社交链接 - 适配主题色 */
-        .social-links {
-            margin: 1rem 0;
-        }
-
-        .social-links a {
-            display: inline-block;
-            margin-right: 1rem;
-            padding: 0.6rem 1.2rem;
-            background-color: var(--primary-color);
-            color: white !important;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(108, 92, 231, 0.3);
-            text-decoration: none;
-        }
-
-        /* 项目展示模块 */
-        .projects {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 2rem;
-            border-top: 5px solid var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
-        .projects h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            font-size: 1.8rem;
-        }
-
-        .project-item {
-            margin: 1rem 0;
-            padding: 1.2rem;
-            border-left: 4px solid var(--primary-color);
-            background-color: var(--project-bg);
-            border-radius: 0 6px 6px 0;
-            transition: all 0.3s ease;
-        }
-
-        .project-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 2px 8px rgba(108, 92, 231, 0.2);
-        }
-
-        /* 联系表单 */
-        .contact {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            border-top: 5px solid var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
-        .contact h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            font-size: 1.8rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: var(--text-color);
-        }
-
-        .form-group input,
-        .form-group textarea {
+        #contact-form input, #contact-form textarea {
             width: 100%;
-            padding: 0.9rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border 0.3s ease;
-            background-color: var(--card-bg);
-            color: var(--text-color);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
-        }
-
-        .btn-submit {
-            background-color: var(--primary-color);
+        #contact-form button {
+            padding: 10px 20px;
+            background: #007bff;
             color: white;
             border: none;
-            padding: 0.9rem 2.5rem;
-            border-radius: 6px;
-            font-size: 1.1rem;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
-
-        .btn-submit:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(108, 92, 231, 0.3);
-        }
-
-        /* 提交成功提示 */
-        .success-message {
+        #success-message {
+            color: green;
             display: none;
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: #d4edda;
-            color: #155724;
-            border-radius: 6px;
-            border: 1px solid #c3e6cb;
-        }
-
-        /* 页脚 */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--footer-text);
-            margin-top: 3rem;
-            background-color: var(--footer-bg);
-            border-top: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        /* 链接样式 */
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
-        }
-
-        /* 响应式调整 - 手机端适配 */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-            header h1 {
-                font-size: 1.6rem;
-            }
-            .avatar {
-                width: 100px;
-                height: 100px;
-            }
-            .social-links a {
-                display: block;
-                margin-bottom: 0.8rem;
-                text-align: center;
-            }
-            .theme-toggle {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-                top: 15px;
-                right: 15px;
-            }
+            margin-top: 10px;
         }
     </style>
-    <!-- 引入EmailJS实现表单提交（无需后端） -->
+</head>
+<body>
+    <!-- 主题切换按钮 -->
+    <div class="theme-toggle">🌙</div>
+
+    <!-- 联系表单 -->
+    <form id="contact-form">
+        <h2>联系我</h2>
+        <input type="text" id="name" placeholder="你的姓名" required>
+        <input type="email" id="email" placeholder="你的邮箱" required>
+        <textarea id="message" rows="5" placeholder="你的留言" required></textarea>
+        <button type="submit">发送留言</button>
+        <div id="success-message">提交成功！我们会尽快回复你～</div>
+    </form>
+
+    <!-- 引入EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        // 初始化EmailJS（替换成你的配置）
-        emailjs.init('YOUR_PUBLIC_KEY');
+        // ========== 1. 表单提交+EmailJS配置（已填好公钥和模板ID） ==========
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-        // 表单提交函数
-        function sendMessage() {
-            // 获取表单数据
+            // 获取表单值
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
@@ -346,49 +81,51 @@
                 return;
             }
 
-            // 发送邮件
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+            // 初始化EmailJS（已填入你的Public Key）
+            emailjs.init('miDmf7K-VscTS4ZyT');
+
+            // 发送邮件（仅需替换 ↓ 这里的 service_inf... 为你的完整Service ID ↓）
+            emailjs.send('service_inf5mt8', 'template_g1cz7h7', {
                 from_name: name,
                 from_email: email,
                 message: message
-            }).then(() => {
-                // 显示成功提示
+            })
+            .then(function(response) {
+                // 提交成功
                 document.getElementById('success-message').style.display = 'block';
-                // 清空表单
                 document.getElementById('contact-form').reset();
-                // 3秒后隐藏提示
+                // 3秒后隐藏成功提示
                 setTimeout(() => {
                     document.getElementById('success-message').style.display = 'none';
                 }, 3000);
-            }, (error) => {
+            }, function(error) {
+                // 提交失败
                 alert('提交失败，请稍后重试！错误信息：' + JSON.stringify(error));
             });
-        }
+        });
 
-        // 深色模式切换
-        function toggleTheme() {
-            const root = document.documentElement;
-            if (root.classList.contains('light')) {
-                root.classList.remove('light');
-                root.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                document.querySelector('.theme-toggle').textContent = '☀️';
-            } else {
-                root.classList.remove('dark');
-                root.classList.add('light');
-                localStorage.setItem('theme', 'light');
-                document.querySelector('.theme-toggle').textContent = '🌙';
-            }
-        }
-
-        // 页面加载时应用保存的主题
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const root = document.documentElement;
-            root.classList.add(savedTheme);
-            document.querySelector('.theme-toggle').textContent = savedTheme === 'light' ? '🌙' : '☀️';
+        // ========== 2. 主题切换功能（保留不动） ==========
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+        
+        // 读取本地存储的主题
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        
+        // 设置切换按钮图标
+        themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+        
+        // 主题切换逻辑
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
         });
     </script>
+<<<<<<< HEAD
 </head>
 <body>
     <!-- 深色模式切换按钮 -->
@@ -462,5 +199,7 @@
     <footer>
         <p>© 2026 我的第一个 GitHub 项目 | 基于 GitHub Pages 构建</p>
     </footer>
+=======
+>>>>>>> 2970ea2 (更新表单和主题切换功能)
 </body>
 </html>
