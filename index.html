@@ -119,87 +119,13 @@
         themeToggle.addEventListener('click', () => {
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+
             
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             themeToggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
         });
     </script>
-<<<<<<< HEAD
-</head>
-<body>
-    <!-- 深色模式切换按钮 -->
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-
-    <!-- 头部 -->
-    <header>
-        <!-- 头像（替换成你的头像链接） -->
-        <img src="https://picsum.photos/200/200" alt="我的头像" class="avatar">
-        <h1>👋 你好，我是开发者小站</h1>
-        <p>这是我的第一个 GitHub Pages 个人主页</p>
-    </header>
-
-    <!-- 主要内容 -->
-    <div class="container">
-        <!-- 关于我 -->
-        <section class="about">
-            <h2>关于我</h2>
-            <p>我正在学习 GitHub Pages 和前端开发，这是我的第一个测试项目。</p>
-            <p>📧 邮箱：l_jiafeng@126.com（可以替换成你的邮箱）</p>
-            <p>🔗 GitHub：<a href="https://github.com/j2415f1452l/my-first-project" target="_blank">我的仓库地址</a></p>
-            
-            <!-- 社交链接 -->
-            <div class="social-links">
-                <a href="https://github.com/j2415f1452l" target="_blank">GitHub</a>
-                <a href="#" target="_blank">知乎</a>
-                <a href="#" target="_blank">博客</a>
-            </div>
-        </section>
-
-        <!-- 我的项目 -->
-        <section class="projects">
-            <h2>我的项目</h2>
-            <div class="project-item">
-                <h3>第一个测试项目</h3>
-                <p>这是我通过 GitHub Pages 部署的第一个静态网站，用于学习和测试。</p>
-                <p>✨ 技术栈：HTML、CSS、JavaScript</p>
-            </div>
-            <div class="project-item">
-                <h3>待开发的新项目</h3>
-                <p>后续我会在这里添加更多有趣的项目和学习笔记。</p>
-            </div>
-        </section>
-
-        <!-- 联系我 -->
-        <section class="contact">
-            <h2>联系我</h2>
-            <form id="contact-form">
-                <div class="form-group">
-                    <label for="name">姓名</label>
-                    <input type="text" id="name" placeholder="请输入你的姓名" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">邮箱</label>
-                    <input type="email" id="email" placeholder="请输入你的邮箱" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">留言</label>
-                    <textarea id="message" rows="5" placeholder="请输入你想对我说的话" required></textarea>
-                </div>
-                <!-- 提交成功提示 -->
-                <div id="success-message" class="success-message">
-                    ✅ 留言提交成功！我会尽快回复你～
-                </div>
-                <button type="button" class="btn-submit" onclick="sendMessage()">发送留言</button>
-            </form>
-        </section>
-    </div>
-
-    <!-- 页脚 -->
-    <footer>
-        <p>© 2026 我的第一个 GitHub 项目 | 基于 GitHub Pages 构建</p>
-    </footer>
-=======
->>>>>>> 2970ea2 (更新表单和主题切换功能)
 </body>
 </html>
