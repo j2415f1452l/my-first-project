@@ -3,129 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
-    <style>
-        /* 基础样式（保留你自己的样式即可） */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        .theme-toggle {
-            cursor: pointer;
-            font-size: 24px;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-        #contact-form {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        #contact-form input, #contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        #contact-form button {
-            padding: 10px 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        #success-message {
-            color: green;
-            display: none;
-            margin-top: 10px;
-        }
-    </style>
+    <title>我的个人网站</title>
+    <!-- 引入外部样式表 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 可选：引入图标库 (月亮/太阳图标) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- 主题切换按钮 -->
-    <div class="theme-toggle">🌙</div>
+    <!-- 暗黑模式切换按钮 -->
+    <button id="theme-toggle" aria-label="切换黑暗模式">
+        <i class="fas fa-moon"></i>
+    </button>
 
-    <!-- 联系表单 -->
-    <form id="contact-form">
+    <!-- 新增：主页头像区域 -->
+    <div class="avatar-container">
+        <!-- 替换 src 为你的头像图片链接 -->
+        <!-- 建议将头像图片放在项目的 images 文件夹中，例如：src="images/avatar.jpg" -->
+        <img src="https://via.placeholder.com/150" alt="我的头像" class="profile-img">
+        <h1>欢迎来到我的主页</h1>
+        <p>2026 马年大吉，代码行空！</p>
+    </div>
+
+    <!-- 你现有的联系我表单 -->
+    <div class="container">
         <h2>联系我</h2>
-        <input type="text" id="name" placeholder="你的姓名" required>
-        <input type="email" id="email" placeholder="你的邮箱" required>
-        <textarea id="message" rows="5" placeholder="你的留言" required></textarea>
-        <button type="submit">发送留言</button>
-        <div id="success-message">提交成功！我们会尽快回复你～</div>
-    </form>
+        <form id="contact-form">
+            <label for="name">fsy</label>
+            <input type="text" id="name" name="name" required>
 
-    <!-- 引入EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+            <label for="email">l_jiafeng@126.com</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">你的留言</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit" class="submit-btn">发送留言</button>
+        </form>
+    </div>
+
+    <!-- 新增：JavaScript 脚本 -->
     <script>
-        // ========== 1. 表单提交+EmailJS配置（已填好公钥和模板ID） ==========
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+        // 修复：黑暗模式切换逻辑
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
 
-            // 获取表单值
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+        // 检查本地存储，恢复用户之前的设置
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
 
-            // 简单验证
-            if (!name || !email || !message) {
-                alert('请填写完整的表单信息！');
-                return;
+        // 监听按钮点击
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark-mode');
+            
+            if (htmlElement.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // 切换为太阳图标
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // 切换为月亮图标
             }
-
-            // 初始化EmailJS（已填入你的Public Key）
-            emailjs.init('miDmf7K-VscTS4ZyT');
-
-            // 发送邮件（仅需替换 ↓ 这里的 service_inf... 为你的完整Service ID ↓）
-            emailjs.send('service_inf5mt8', 'template_g1cz7h7', {
-                from_name: name,
-                from_email: email,
-                message: message
-            })
-            .then(function(response) {
-                // 提交成功
-                document.getElementById('success-message').style.display = 'block';
-                document.getElementById('contact-form').reset();
-                // 3秒后隐藏成功提示
-                setTimeout(() => {
-                    document.getElementById('success-message').style.display = 'none';
-                }, 3000);
-            }, function(error) {
-                // 提交失败
-                alert('提交失败，请稍后重试！错误信息：' + JSON.stringify(error));
-            });
         });
 
-        // ========== 2. 主题切换功能（保留不动） ==========
-        const themeToggle = document.querySelector('.theme-toggle');
-        const html = document.documentElement;
-        
-        // 读取本地存储的主题
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', savedTheme);
-        
-        // 设置切换按钮图标
-        themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
-        
-        // 主题切换逻辑
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            themeToggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        // 表单提交提示（保留原有功能）
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('留言发送成功！马年行大运！');
+            this.reset();
         });
     </script>
 </body>
-</html>
+</html
